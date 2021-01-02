@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AcDec Study Tool</title>
+    <link rel="stylesheet" href="index.css">
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+</head>
+<body onload="getQuestion()">
+    <div class="top">
+        <img src="logo.png" alt="USAD">
+        <h2>Art Acdec Study Tool</h2>
+    </div>
+    <div class="main">
+       <div class="container">
+       <h3 class="score">Score: 0/0 (0%)</h3>
+        
+        <img alt="Image" id="artwork">
+        <h4 id="question"></h4>
+        <div class="option" id="a">
+            <div class="letter">
+                <h4>A</h4>
+            </div>
+            <p id="optionA"></p>
+        </div>
+        <div class="option" id="b">
+            <div class="letter">
+                <h4>B</h4>
+            </div>
+            <p id="optionB"></p>
+        </div>
+        <div class="option" id="c">
+            <div class="letter">
+                <h4>C</h4>
+            </div>
+            <p id="optionC"></p>
+        </div>
+        <div class="option" id="d">
+            <div class="letter">
+                <h4>D</h4>
+            </div>
+            <p id="optionD"></p>
+        </div>
+        <div class="option" id="e">
+            <div class="letter">
+                <h4>E</h4>
+            </div>
+            <p id="optionE"></p>
+        </div>
+        <input type="submit" value="Submit Answer" name="submit" onclick="checkAnswer()" id="submit">
+        <input type="submit" value="Next Question" onclick="getQuestion()" id="next">
+        </div>
+            </div>
+        <div class="footer">
+            <p>This website was created by Reed Uhlik.  If you have any suggestions, please email reeduhlik@gmail.com</p>
+        </div>
+
+    <script>
+        var audio = new Audio('https://www.youtube.com/watch?v=2ZIpFytCSVc');
+            audio.play();
+        var numberAttempted = 0;
+        var numberCorrect = 0;
+        var selection = "";
+        var correct = '';
+        var questions = [
+            {question:"The artist who created the piece pictured above was ________.", a:"Michael Heizer", b:"Jasper Johns", c:"Ava Hesse", d:"Faith Ringgold", e:"Andy Warhol", correct:"b", src:"flag.jpg"},
+            {question:"The artist who created the piece pictured above was ________.", a:"Michael Heizer", b:"Jasper Johns", c:"Allen Kaprow", d:"Claes Oldenburg", e:"Faith Ringgold", correct:"a", src:"dn.jpg"},
+            {question:"The artist who created the piece pictured above was ________.", a:"Andy Warhol", b:"Jasper Johns", c:"Allen Kaprow", d:"Donald Judd", e:"Claes Oldenburg", correct:"e", src:"cake.jpg"},
+            {question:"The artist who created the piece pictured above was ________.", a:"Ava Hesse", b:"Michael Heizer", c:"Donald Judd", d:"Edward Keinholz", e:"Claes Oldenburg", correct:"c", src:"stack.jpg"}
+        ];
+        function getQuestion(){
+                        $("#a").css("border", ".5px solid #ccc");
+            $("#b").css("border", ".5px solid #ccc");
+            $("#c").css("border", ".5px solid #ccc");
+            $("#d").css("border", ".5px solid #ccc");
+            $("#e").css("border", ".5px solid #ccc");
+
+            var index = Math.floor(Math.random() * questions.length);
+            console.log(index);
+            console.log(questions[index].question);
+            $("#question").html(questions[index].question);
+            $("#artwork").attr("src", "imgs/" + questions[index].src);
+            $("#optionA").html(questions[index].a);
+            $("#optionB").html(questions[index].b);
+            $("#optionC").html(questions[index].c);
+            $("#optionD").html(questions[index].d);
+            $("#optionE").html(questions[index].e);
+            correct = questions[index].correct;
+
+        }
+        function checkAnswer(){
+            var name = "#" + selection;
+	       
+            $(name).css("border", "2px solid red");
+            $(name2).css("border", "2px solid #11b571");
+            if(correct == selection){
+                numberCorrect++;
+            }
+            numberAttempted++;
+                        $(".score").html("Score: " + numberCorrect + "/" + numberAttempted + " (" + Math.round(numberCorrect/numberAttempted * 100) + "%)");
+        }
+
+        $(".option").on("click", function(){
+            selection = this.id;
+            $("#a").css("border", ".5px solid #ccc");
+            $("#b").css("border", ".5px solid #ccc");
+            $("#c").css("border", ".5px solid #ccc");
+            $("#d").css("border", ".5px solid #ccc");
+            $("#e").css("border", ".5px solid #ccc");
+            $(this).css("border", "2px solid #004d99");
+        });
+    </script>
+</body>
+</html>
